@@ -14,9 +14,9 @@ export default function (config) {
         baseURL: '/api',
         // 超出时长
         // timeout: 1000,
-       
+
     });
-    
+
 
     // 添加请求拦截器
     instance.interceptors.request.use(function (config) {
@@ -24,17 +24,17 @@ export default function (config) {
         console.log(config);
         // if是登录的话 return config 否则把token值加入到请求头中
         if (config.url == "/login") return config;
-        config.headers['token'] = sessionStorage.getItem('token')
+        config.headers.Authorization = window.sessionStorage.getItem('token')
         return config;
     }, function (error) {
         // 对请求错误做些什么
         return Promise.reject(error);
     });
- 
+
     // 添加响应拦截器
     instance.interceptors.response.use(function (response) {
         // 对响应数据做点什么
-        return response.data;
+        return response.data.data;
     }, function (error) {
         // 对响应错误做点什么
         return Promise.reject(error);

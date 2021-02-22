@@ -1,6 +1,9 @@
 <template>
   <div class="login">
-    <div class="box"> 
+    <div class="picture">
+      <img src="../assets/image/logo.png" alt="" />
+    </div>
+    <div class="box">
       <div class="content">
         <el-form :model="formLabelAlign" :rules="rules" ref="formLabelAlign">
           <el-form-item prop="username">
@@ -28,6 +31,7 @@
   </div>
 </template>
 <script>
+import {login} from '../http/http'
 export default {
   props: {},
   data() {
@@ -56,35 +60,30 @@ export default {
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
-        // if (valid) {
-        //   // alert('submit!');
-        //   // console.log(this.axios);
-        //   this.axios
-        //     .post('/api/login',{
-        //       username: this.formLabelAlign.username,
-        //       password: this.formLabelAlign.password,
-        //     })
-        //     .then((res) => {
-        //       console.log(res);
-        //       // 登录成功会分发一个token给客户端，将token存储，后续发送请求需要带上此token
-        //       let token = res.token;
-        //       // console.log(token);
-        //       sessionStorage.setItem("token", token);
-        //       this.$message({
-        //         message: "登陆成功",
-        //         type: "success",
-        //         // 一秒钟消失
-        //         duration: 1000,
-        //         // 关闭之后跳转页面
-        //         onClose:()=>{
-        //           this.$router.push("/home");
-        //         },
-        //       });
-        //     });
-        // } else {
-        //   console.log("error submit!!");
-        //   return false;
-        // }
+        if (valid) {
+          // alert('submit!');
+          // console.log(this.axios);
+         login(this.formLabelAlign.username,this.formLabelAlign.password).then((res) => {
+              console.log(res);
+              // 登录成功会分发一个token给客户端，将token存储，后续发送请求需要带上此token
+              let token = res.token;
+              console.log(token);
+              sessionStorage.setItem("token", token);
+              this.$message({
+                message: "登陆成功",
+                type: "success",
+                // 一秒钟消失
+                duration: 1000,
+                // 关闭之后跳转页面
+                onClose:()=>{
+                  this.$router.push("/home");
+                },
+              });
+            });
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
       });
     },
   },
@@ -99,8 +98,28 @@ export default {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  position: relative;
+  .picture {
+    width: 152px;
+    height: 152px;
+    background-color: white;
+    border-radius: 50%;
+    // position: relative;
+    position: absolute;
+    top: 230px;
+    img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background-color: #eeeeee;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+  }
   .content {
     width: 300px;
+    margin-top: 114px;
     .center {
       overflow: hidden;
       button {
@@ -115,14 +134,14 @@ export default {
     }
   }
 }
-.box{
+.box {
   background-color: white;
   width: 450px;
   height: 300px;
- border-radius: 5px;
- display: flex;
- justify-content: center;
- align-items: center;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
 
