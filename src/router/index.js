@@ -19,9 +19,37 @@ const routes = [{
     component: () => import('../views/home'),
     children: [
       {
-        path: 'main',
-        component: () => import('../components/main.vue')
-      }
+        path: 'users',
+        component: () => import('../components/users.vue')
+      },
+      {
+        path: 'roles',
+        component: () => import('../components/roles.vue')
+      },
+      {
+        path: 'rights',
+        component: () => import('../components/rights.vue')
+      },
+      {
+        path: 'goods',
+        component: () => import('../components/goods.vue')
+      },
+      {
+        path: 'params',
+        component: () => import('../components/params.vue')
+      },
+      {
+        path: 'categories',
+        component: () => import('../components/categories.vue')
+      },
+      {
+        path: 'orders',
+        component: () => import('../components/orders.vue')
+      },
+      {
+        path: 'reports',
+        component: () => import('../components/reports.vue')
+      },
     ]
   }
 ]

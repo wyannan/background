@@ -12,6 +12,7 @@
             text-color="#fff"
             active-text-color="#409eff"
             background-color="#545c64"
+            :router="openrouter"
           >
             <el-submenu
               :index="item.id + ''"
@@ -32,6 +33,7 @@
           </el-menu>
         </el-aside>
         <el-main>
+          <!-- 路由出口 -->
           <router-view></router-view>
         </el-main>
       </el-container>
@@ -46,6 +48,7 @@ export default {
   data() {
     return {
       list: "",
+      openrouter:true
     };
   },
   mounted() {
@@ -112,6 +115,7 @@ export default {
 .el-menu {
   background-color: #333744;
   height: 100%;
+  border-right: none;
 }
 .el-submenu {
   .el-submenu__title {
